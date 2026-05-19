@@ -1,5 +1,4 @@
 ---
-import { SEO } from "astro-seo";
 import Footer from "@/components/footer.astro";
 import Navbar from "@/components/navbar/navbar.astro";
 import "@fontsource-variable/inter/index.css";
@@ -7,55 +6,30 @@ import "@fontsource-variable/bricolage-grotesque";
 import "../styles/global.css";
 
 export interface Props {
-  title: string;
+  title?: string;
+  description?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const siteName = "鹤庆县砺行信息工作室（个体工商户）";
+const {
+  title,
+  description = "鹤庆县砺行信息工作室（个体工商户）位于云南省大理州鹤庆县，主要从事软件开发、Web 网站、App 与微信小程序相关开发，当前专注工具类产品开发。",
+} = Astro.props;
 
-const resolvedImageWithDomain = new URL(
-  "/opengraph.jpg",
-  Astro.site
-).toString();
-
-const { title } = Astro.props;
-
-const makeTitle = title
-  ? title + " | " + "Astroship"
-  : "Astroship - Starter Template for Astro with Tailwind CSS";
+const pageTitle = title ? `${title} | ${siteName}` : siteName;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-
-    <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
-    <SEO
-      title={makeTitle}
-      description="Astroship is a starter website template for Astro built with TailwindCSS."
-      canonical={canonicalURL}
-      twitter={{
-        creator: "@surjithctly",
-        site: "@web3templates",
-        card: "summary_large_image",
-      }}
-      openGraph={{
-        basic: {
-          url: canonicalURL,
-          type: "website",
-          title: `Astroship - Starter Template for Astro`,
-          image: resolvedImageWithDomain,
-        },
-        image: {
-          alt: "Astroship Homepage Screenshot",
-        },
-      }}
-    />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
   </head>
-  <body>
+  <body class="bg-white text-slate-950 antialiased">
     <Navbar />
     <slot />
     <Footer />
