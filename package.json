@@ -24,5 +24,8 @@
     "astro-navbar": "^2.3.9",
     "sharp": "^0.33.5",
     "tailwindcss": "^4.0.14"
+  },
+  "devDependencies": {
+    "wrangler": "4.93.0"
   }
 }
